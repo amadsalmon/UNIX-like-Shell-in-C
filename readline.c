@@ -205,16 +205,20 @@ int cd(char **args, char**envp)
 
 int print(char **args, char**envp)
 {
-    // TODO: check no special character ( ' ', '\t', '<', '>', '|', '', '=') can make the shell crash.
   for(int i = 0; envp[i]!=NULL; i++){
       printf("%s\n", envp[i]);
   }
   return 1;
 }
 
-typedef int (*builtin_function)(char** args, char**envp);
-builtin_function builtin_functions[4] = {cd, pwd, print};
-char *builtin_str[] = {"cd","pwd","print"};
+int set(char **args, char**envp) 
+{
+    // TODO: check no special character ( ' ', '\t', '<', '>', '|', '', '=') can make the shell crash.
+}
+
+typedef int (*builtin_function)(char** args, char** envp);
+builtin_function builtin_functions[4] = {cd, pwd, print, set};
+char *builtin_str[] = {"cd","pwd","print","set"};
 
 
 int nb_builtins(){
