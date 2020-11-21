@@ -157,16 +157,17 @@ int pwd(char **args, char**envp)
 
 int cd(char **args, char**envp)
 {
-  if (args[1] == NULL) {
-    fprintf(stderr, "cd: expected argument\n");
-    return -1;
-  } else {
-    if (chdir(args[1]) != 0) {
-      perror("Error: can't change directory.");
-      return -1;
+    if (args[1] == NULL) {
+        fprintf(stderr, "cd: expected argument\n");
+        return 0;
     }
-  }
-  return 1;
+    if (chdir(args[1]) == 0) {
+        return 1;
+    } else
+    {
+        perror("Error: can't change directory.");
+        return 1;
+    }
 }
 
 int print(char **env, char**envp)
