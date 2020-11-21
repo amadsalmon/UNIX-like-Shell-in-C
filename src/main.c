@@ -31,7 +31,13 @@ int main(int argc, char** argv, char**envp) {
             printf("[%s], ", words[i]);
         }
 
-        run_builtin(words, envp);
+        if (run_builtin(words, envp))
+        {
+        }
+        else
+        {
+            launch_process(words, envp);
+        }
 
         printf("\n");
         free(words);
