@@ -115,6 +115,26 @@ char **split_in_words(char *line) {
     return tmp;
 }
 
+/**
+ * Function to implement substring function in C.
+ * Extracts length characters from source string starting from pos index, then copies them into the destination string.
+ * */
+char* substr(char *destination, char *source, int pos, int length)
+{
+    while (length > 0) {
+        *destination = *(source + pos);
+        destination++;
+        source++;
+        length--;
+    }
+ 
+    // End of string terminates destination string.
+    *destination = '\0';
+ 
+    // Return the destination string.
+    return destination;
+}
+
 int launch_process(char** args, char**envp){
   pid_t pid;
   int status;
@@ -154,12 +174,16 @@ int pwd(char **args, char**envp)
 
     // Loop on all the environment variables until PWD is found.
     char* pwd = NULL;
-    for(int i = 0; envp[i] != NULL; i++){
-            if (strcmp(envp[i], "PATH") == 0){
-                pwd = envp[i]+4; // ignore 'PWD=' which length is 4.
-                printf("%s", pwd);
-                return 1;
-            }
+    char tmp[4]; // 4 is the size of 'PWD\0'
+    for (int i = 0; envp[i] != NULL; i++)
+    {
+        substr(tmp, envp[i], 0, 3);
+        if (strcmp(tmp, "PWD") == 0)
+        {
+            pwd = envp[i]+4; // ignore 'PWD=' which length is 4.
+            printf("%s", pwd);
+            return 1;
+        }
     }
     return 0;
 }
@@ -189,7 +213,7 @@ int print(char **env, char**envp)
 
 typedef int (*builtin_function)(char** args, char**envp);
 builtin_function builtin_functions[4] = {cd, pwd, print};
-char *builtin_str[] = {"cd","print"};
+char *builtin_str[] = {"cd","pwd","print"};
 
 
 int nb_builtins(){
