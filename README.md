@@ -1,4 +1,4 @@
-# C UNIX-like Shell
+# UNIX-like Shell in C
 *Amad Salmon - November 2020*
 
 ## Purpose
