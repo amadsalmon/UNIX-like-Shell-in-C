@@ -178,7 +178,7 @@ int print(char **env)
 }
 
 typedef int (*builtin_function)(char** args);
-builtin_function builtin_functions[4];
+builtin_function builtin_functions[4] = {cd, pwd, print};
 char *builtin_str[] = {"cd", "pwd","print"};
 
 
@@ -187,14 +187,15 @@ int nb_builtins(){
 }
 
 int execute(char** args, char**envp){
-  if (args[0] == NULL)
-    perror("Error: please enter a command.");
-
-    if (strcmp(args[0], builtin_str[i]) == 0)
-      return (*builtin_functions[i])(args);
-
-  return launch_process(args, envp);
+    if (args[0] == NULL)
+        perror("Error: please enter a command.");
     for (int i = 0; i < nb_builtins(); i++)
+    {
+        if (strcmp(args[0], builtin_str[i]) == 0){
+            return (*builtin_functions[i])(args);
+        }
+    }
+    return 0;
 }
 
 
