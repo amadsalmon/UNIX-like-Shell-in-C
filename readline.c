@@ -145,7 +145,7 @@ int launch_process(char** args, char**envp){
   return 0;
 }
 
-int pwd(char **args)
+int pwd(char **args, char**envp)
 {
   if (args[1] == NULL) {
     fprintf(stderr, "pwd: expected argument\n");
@@ -155,7 +155,7 @@ int pwd(char **args)
   return 1;
 }
 
-int cd(char **args)
+int cd(char **args, char**envp)
 {
   if (args[1] == NULL) {
     fprintf(stderr, "cd: expected argument\n");
@@ -169,7 +169,7 @@ int cd(char **args)
   return 1;
 }
 
-int print(char **env)
+int print(char **env, char**envp)
 {
   for(int i = 0; env[i]!=NULL; i++){
       printf("%s\n", env[i]);
@@ -177,9 +177,9 @@ int print(char **env)
   return 1;
 }
 
-typedef int (*builtin_function)(char** args);
+typedef int (*builtin_function)(char** args, char**envp);
 builtin_function builtin_functions[4] = {cd, pwd, print};
-char *builtin_str[] = {"cd", "pwd","print"};
+char *builtin_str[] = {"cd","print"};
 
 
 int nb_builtins(){
@@ -192,7 +192,7 @@ int execute(char** args, char**envp){
     for (int i = 0; i < nb_builtins(); i++)
     {
         if (strcmp(args[0], builtin_str[i]) == 0){
-            return (*builtin_functions[i])(args);
+            return (*builtin_functions[i])(args, envp);
         }
     }
     return 0;
