@@ -182,19 +182,19 @@ builtin_function builtin_functions[4];
 char *builtin_str[] = {"cd", "pwd","print"};
 
 
-int nb_builtins(builtin_function builtin_funcs[]){
-  return sizeof(builtin_funcs) / sizeof(builtin_function);
+int nb_builtins(){
+  return sizeof(builtin_str) / sizeof(builtin_str[0]);
 }
 
 int execute(char** args, char**envp){
   if (args[0] == NULL)
     perror("Error: please enter a command.");
 
-  for (int i = 0; i < nb_builtins(builtin_str); i++)
     if (strcmp(args[0], builtin_str[i]) == 0)
       return (*builtin_functions[i])(args);
 
   return launch_process(args, envp);
+    for (int i = 0; i < nb_builtins(); i++)
 }
 
 
