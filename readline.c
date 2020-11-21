@@ -147,12 +147,21 @@ int launch_process(char** args, char**envp){
 
 int pwd(char **args, char**envp)
 {
-  if (args[1] == NULL) {
-    fprintf(stderr, "pwd: expected argument\n");
-    return -1;
-  }
-  // access the PWD env var as Elias said
-  return 1;
+    if (args[1] != NULL) {
+        fprintf(stderr, "pwd: unexpected argument\n");
+        return 0;
+    }
+
+    // Loop on all the environment variables until PWD is found.
+    char* pwd = NULL;
+    for(int i = 0; envp[i] != NULL; i++){
+            if (strcmp(envp[i], "PATH") == 0){
+                pwd = envp[i]+4; // ignore 'PWD=' which length is 4.
+                printf("%s", pwd);
+                return 1;
+            }
+    }
+    return 0;
 }
 
 int cd(char **args, char**envp)
