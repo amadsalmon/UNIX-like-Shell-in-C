@@ -203,10 +203,11 @@ int cd(char **args, char**envp)
     }
 }
 
-int print(char **env, char**envp)
+int print(char **args, char**envp)
 {
-  for(int i = 0; env[i]!=NULL; i++){
-      printf("%s\n", env[i]);
+    // TODO: check no special character ( ' ', '\t', '<', '>', '|', '', '=') can make the shell crash.
+  for(int i = 0; envp[i]!=NULL; i++){
+      printf("%s\n", envp[i]);
   }
   return 1;
 }
