@@ -31,10 +31,12 @@ int main(int argc, char** argv, char**envp) {
             printf("[%s], ", words[i]);
         }
 
+        // Check if wanted command is implemented by the built-in functions.
         if (run_builtin(words, envp))
         {
         }
-        else
+        // If not, launch the command as an external command.
+        else 
         {
             launch_process(words, envp);
         }
