@@ -1,0 +1,9 @@
+Programmation Concurrente
+TP1 - Interprête d'un mini-langage de commandes
+Amad Salmon
+
+To compile:
+gcc -g -o readline readline.c
+
+To run:
+./readline
