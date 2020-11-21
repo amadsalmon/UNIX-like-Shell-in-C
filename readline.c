@@ -169,8 +169,17 @@ int cd(char **args)
   return 1;
 }
 
+int print(char **env)
+{
+  for(int i = 0; env[i]!=NULL; i++){
+      printf("%s\n", env[i]);
+  }
+  return 1;
+}
+
 typedef int (*builtin_function)(char** args);
 builtin_function builtin_functions[4];
+char *builtin_str[] = {"cd", "pwd","print"};
 
 
 int nb_builtins(builtin_function builtin_funcs[]){
