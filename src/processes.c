@@ -16,15 +16,15 @@ int launch_process(char** args, char**envp){
         strcat(path, args[0]);
         if (execve(path, args, envp) == -1)
         {
-        perror("Execve error");
+            perror("Execve error");
         }
         //exit(EXIT_FAILURE);
     } else {
         // Parent process
         pid = wait(&status);
         if (pid==-1) {
-        perror("waitpid: "); 
-        exit(-1);
+            perror("waitpid: "); 
+            exit(-1);
         }
     }
     return 0;
