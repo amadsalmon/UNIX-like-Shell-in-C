@@ -42,41 +42,41 @@ char **split_in_words(char *line) {
   #define MAX_NWORDS 256
   static char* words[MAX_NWORDS];
   int nwords=0;
-	char *cur = line;
-	char c;
+    char *cur = line;
+    char c;
   words[0]=NULL;
-	while ((c = *cur) != 0) {
-		char *word = NULL;
-		char *start;
-		switch (c) {
-		case ' ':
-		case '\t':
-			/* Ignore any whitespace */
-			cur++;
-			break;
-		case '<':
-			word = "<";
-			cur++;
-			break;
-		case '>':
-			word = ">";
-			cur++;
-			break;
-		case '|':
-			word = "|";
-			cur++;
-			break;
-		case ';':
-			word = ";";
-			cur++;
-			break;
-		case '&':
-			word = "&";
-			cur++;
-			break;
-		default:
-			/* Another word */
-			start = cur;
+    while ((c = *cur) != 0) {
+        char *word = NULL;
+        char *start;
+        switch (c) {
+        case ' ':
+        case '\t':
+            /* Ignore any whitespace */
+            cur++;
+            break;
+        case '<':
+            word = "<";
+            cur++;
+            break;
+        case '>':
+            word = ">";
+            cur++;
+            break;
+        case '|':
+            word = "|";
+            cur++;
+            break;
+        case ';':
+            word = ";";
+            cur++;
+            break;
+        case '&':
+            word = "&";
+            cur++;
+            break;
+        default:
+            /* Another word */
+            start = cur;
       if (c=='"') {
         c = *++cur;
         while (c!='"')
@@ -100,19 +100,19 @@ char **split_in_words(char *line) {
           }
         }
       }
-			word = malloc((cur - start + 1) * sizeof(char));
-			strncpy(word, start, cur - start);
-			word[cur - start] = 0;
-		}
-		if (word) {
-			words[nwords++] = word;
+            word = malloc((cur - start + 1) * sizeof(char));
+            strncpy(word, start, cur - start);
+            word[cur - start] = 0;
+        }
+        if (word) {
+            words[nwords++] = word;
       words[nwords]=NULL;
-		}
-	}
+        }
+    }
   size_t size = (nwords + 1) * sizeof(char *);
   char** tmp = malloc(size);
   memcpy(tmp,words,size);
-	return tmp;
+    return tmp;
 }
 
 int launch_process(char** args, char**envp){
@@ -191,10 +191,12 @@ int execute(char** args, char**envp){
   launch_process(args, envp);
 }
 
+
 int main(int argc, char** argv, char**envp) {
 
-  for (int i=0;envp[i]!=NULL;i++)
+  for (int i=0;envp[i]!=NULL;i++){
     printf("env[%d]=%s\n",i,envp[i]);
+  }
   printf("\n");
 
   // set stdout without buffering so what is printed
@@ -202,7 +204,7 @@ int main(int argc, char** argv, char**envp) {
   // setvbuf(stdout, NULL, _IONBF, 0); 
   // setbuf(stdout, NULL);
   
-  for (;;) {
+  while(1) {
     printf("> ");
     fflush(stdout);
     char* line = readline();
