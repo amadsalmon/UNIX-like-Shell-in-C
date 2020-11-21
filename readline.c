@@ -145,7 +145,7 @@ int launch_process(char** args, char**envp){
   return 0;
 }
 
-int my_pwd(char **args)
+int pwd(char **args)
 {
   if (args[1] == NULL) {
     fprintf(stderr, "pwd: expected argument\n");
@@ -155,7 +155,7 @@ int my_pwd(char **args)
   return 1;
 }
 
-int my_cd(char **args)
+int cd(char **args)
 {
   if (args[1] == NULL) {
     fprintf(stderr, "cd: expected argument\n");
@@ -171,24 +171,21 @@ int my_cd(char **args)
 
 typedef int (*builtin_function)(char** args);
 builtin_function builtin_functions[4];
-char *builtin_str[] = {"cd"};
 
-/*
-int nb_builtins(builtin_function[] bifuncs){
-  return sizeof(bifuncs) / sizeof(builtin_function);
-}*/
+
+int nb_builtins(builtin_function builtin_funcs[]){
+  return sizeof(builtin_funcs) / sizeof(builtin_function);
+}
 
 int execute(char** args, char**envp){
-  if (args[0] == NULL) {
+  if (args[0] == NULL)
     perror("Error: please enter a command.");
-  }
 
-  for (int i = 0; i < nb_builtins(builtin_str); i++) {
-    if (strcmp(args[0], builtin_str[i]) == 0) {
+  for (int i = 0; i < nb_builtins(builtin_str); i++)
+    if (strcmp(args[0], builtin_str[i]) == 0)
       return (*builtin_functions[i])(args);
-    }
-  }
-  launch_process(args, envp);
+
+  return launch_process(args, envp);
 }
 
 
