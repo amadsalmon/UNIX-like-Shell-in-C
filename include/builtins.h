@@ -5,7 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "string_helpers.h"
+#include "helpers.h"
 
 int run_builtin(char **args, char **envp);
 
