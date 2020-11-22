@@ -126,7 +126,7 @@ char *substr(char *destination, char *source, int pos, int length)
     return destination;
 }
 
-void special_char_remover(char *s)
+void special_chars_remover(char *s)
 {
     char *c = s;
     char *ch;
