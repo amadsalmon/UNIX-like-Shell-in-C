@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
+#include <fcntl.h>
+#include <sys/wait.h>
 #include "builtins.h"
 
 #define BUILTIN_COMMAND 0
@@ -12,11 +13,10 @@ struct process
 {
     int type;
     char *path;
-    int argc;
     char **argv;
     char *input;
     char *output;
-    int output_mode;
+    int output_flag;
 };
 
 typedef struct pid_node
@@ -30,7 +30,7 @@ push_pid(pid_list *head, pid_t pid);
 
 struct process *create_process(char **words);
 
-int run_process(struct process *p, char **envp, int in_fd, int out_fd);
+int run_process(pid_list *current, char **envp, int in_fd, int out_fd);
 
 int launch_process(char **args, char **envp, pid_list *pidlist);
 
