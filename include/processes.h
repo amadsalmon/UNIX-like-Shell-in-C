@@ -26,7 +26,7 @@ typedef struct pid_node
     struct pid_node *next;
 } pid_list;
 
-push_pid(pid_list *head, pid_t pid);
+int push_pid(pid_list *head, pid_t pid);
 
 struct process *create_process(char **words);
 
