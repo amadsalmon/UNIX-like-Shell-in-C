@@ -5,6 +5,19 @@ builtin_function builtin_functions[4] = {cd, pwd, print, set};
 char *builtin_str[] = {"cd", "pwd", "print", "set"};
 
 
+int is_builtin(char** args){
+    if (args[0] == NULL){
+        perror("Error: please enter a command.");
+    }
+    for (int i = 0; i < nb_builtins(); i++)
+    {
+        if (strcmp(args[0], builtin_str[i]) == 0){
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int run_builtin(char** args, char**envp){
     if (args[0] == NULL)
         perror("Error: please enter a command.");

@@ -125,3 +125,14 @@ char *substr(char *destination, char *source, int pos, int length)
     // Return the destination string.
     return destination;
 }
+
+int is_pipeline(char **expression) {
+    for (int i = 0; expression[i] != '\0'; i++){
+        if ( strcmp(expression[i], "|") == 0 ){
+            return i;
+        }
+    }
+    return -1;
+}
+
+

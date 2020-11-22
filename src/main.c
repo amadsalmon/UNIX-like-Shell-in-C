@@ -31,6 +31,14 @@ int main(int argc, char** argv, char**envp) {
             printf("[%s], ", words[i]);
         }
 
+    
+        
+
+        // Check if given command is made of pipes.
+        if(is_pipeline(words)){
+            printf("hell yeah pipeline!\n");
+            pipeline_manager(words, pidlist);
+        }
         // Check if wanted command is implemented by the built-in functions.
         if (run_builtin(words, envp))
         {
