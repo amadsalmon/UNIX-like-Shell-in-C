@@ -93,7 +93,7 @@ int set(char **args, char**envp)
             strcat(envp[i], "=");
             strcat(envp[i], args[1]);
             free(name);
-            return;
+            return 0;
         }
         free(name);
     }
