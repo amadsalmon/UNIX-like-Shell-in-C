@@ -125,3 +125,37 @@ char *substr(char *destination, char *source, int pos, int length)
     // Return the destination string.
     return destination;
 }
+
+void special_char_remover(char *s)
+{
+    char *c = s;
+    char *ch;
+
+    while (*c != '\0') {
+        switch (*c) {
+        case ' ':
+        case '\t':
+        case '<':
+        case '>':
+        case '|':
+        case '"':
+        case '=':
+            ch = c;
+            // Delete the special character and 
+            while (*ch != '\0') {
+                *ch = *(ch + 1);
+                ch++;
+            }
+            break;
+        }
+        c++;
+    }
+    return;
+}
+
+int number_of_args(char **args){
+    int i;
+    for (i = 0; args[i] != NULL; i++)
+        ;
+    return i;
+}

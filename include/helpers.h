@@ -20,3 +20,5 @@ char **split_in_words(char *line);
  * Extracts length characters from source string starting from pos index, then copies them into the destination string.
  * */
 char *substr(char *destination, char *source, int pos, int length);
+
+int number_of_args(char **args);

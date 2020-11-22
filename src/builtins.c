@@ -69,6 +69,42 @@ int print(char **args, char**envp)
 
 int set(char **args, char**envp) 
 {
-    // TODO: check no special character ( ' ', '\t', '<', '>', '|', '', '=') can make the shell crash.
+    int flag = 1;
+
+    int nb_args = number_of_args(args);
+
+    if (nb_args != 2){
+        printf("Error: invalid number of arguments for set.\n");
+        return 0;
+    }
+
+    // Remove any special character ( ' ', '\t', '<', '>', '|', '', '=') that can make the shell crash.
+    special_chars_remover(args[1]);
+
+    int i;
+    for (int i = 0; envp[i] != NULL; i++)
+    {
+        char* name = name_envp(envp[i]);
+        flag = strcmp(args[0], name);
+
+        if (flag == 0){
+            envp[i] = realloc(envp[i], 1 + strlen(name) + strlen(args[1]));
+            strcpy(envp[i], name);
+            strcat(envp[i], "=");
+            strcat(envp[i], args[1]);
+            free(name);
+            return;
+        }
+        free(name);
+    }
+
+    envp = realloc(envp, (i+1) * sizeof(*envp));
+    envp[i] = malloc(strlen(args[1]) * sizeof(char));
+
+    strcpy(envp[i], args[0]);
+    strcat(envp[i], "=");
+    strcat(envp[i], args[1]);
+    envp[i+1] =  NULL;
+
     return 0;
 }
