@@ -1,8 +1,7 @@
 #include "../include/processes.h"
 
-
 int push_pid(pid_list * head, pid_t pid) {
-    if (pid == NULL)
+    if (pid == -1)
     {
         return 0;
     }
@@ -118,7 +117,6 @@ int zombies_cleanup(pid_list* head)
     {  
         next = current->next;  
 
-        /* START OF VICTOR'S RUBBISH */
         int uncleaned_zombie = 1;
         int deadID, status = 0;
         while(uncleaned_zombie) {
@@ -136,8 +134,6 @@ int zombies_cleanup(pid_list* head)
                 return 0;
             }
         }
-        /* END OF VICTOR'S RUBBISH */
-
          
     }  
       
