@@ -68,9 +68,11 @@ struct process * create_process(char **words){
     return p;
 }
 
-int run_process(struct process * p, char** envp, int in_fd, int out_fd){
+int run_process(pid_list* current, char** envp, int in_fd, int out_fd){
+    struct process *p = current->p;
+
     if (p == NULL){
-        return;
+        return 0;
     }
 
     pid_t pid;
@@ -95,12 +97,12 @@ int run_process(struct process * p, char** envp, int in_fd, int out_fd){
         }
 
         execve(p->path, p->argv, envp);
-        printf("PANIC: Couldn't execute %s\n", p->path);
+        printf("Error: execve %s\n", p->path);
         exit(-1);
     }
     else
     {
-        // p->pid = pid;
+        current->pid = pid;
     }
 
     return 1;
