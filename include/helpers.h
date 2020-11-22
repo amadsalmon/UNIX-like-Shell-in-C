@@ -21,4 +21,9 @@ char **split_in_words(char *line);
  * */
 char *substr(char *destination, char *source, int pos, int length);
 
+/**
+ * Removes any special character from given string
+ * */
+void special_char_remover(char *s);
+
 int number_of_args(char **args);
