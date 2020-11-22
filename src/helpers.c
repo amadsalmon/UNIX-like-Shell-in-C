@@ -127,8 +127,8 @@ char *substr(char *destination, char *source, int pos, int length)
 }
 
 int is_pipeline(char **expression) {
-    for (int i = 0; expression[i] != '\0'; i++){
-        if ( strcmp(expression[i], "|") == 0 ){
+    for (int i = 0; expression[i] != NULL; i++){
+        if ( expression[i][0] == '|'){
             return i;
         }
     }
