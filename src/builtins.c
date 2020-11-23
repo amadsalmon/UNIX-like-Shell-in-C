@@ -81,8 +81,8 @@ int set(char **args, char**envp)
     // Remove any special character ( ' ', '\t', '<', '>', '|', '', '=') that can make the shell crash.
     special_chars_remover(args[1]);
 
-    int i;
-    for (int i = 0; envp[i] != NULL; i++)
+    int i = 0;
+    for (i = 0; envp[i] != NULL; i++)
     {
         char* name = name_envp(envp[i]);
         flag = strcmp(args[0], name);

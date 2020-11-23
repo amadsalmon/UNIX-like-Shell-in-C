@@ -22,7 +22,7 @@ char **split_in_words(char *line);
 char *substr(char *destination, char *source, int pos, int length);
 
 /**
- * Removes any special character from given string
+ * Removes from the given string any special character ( ' ', '\t', '<', '>', '|', '', '=') that can make the shell crash.
  * */
 void special_chars_remover(char *s);
 
