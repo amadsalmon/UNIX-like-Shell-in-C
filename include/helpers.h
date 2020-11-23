@@ -26,4 +26,7 @@ char *substr(char *destination, char *source, int pos, int length);
  * */
 void special_chars_remover(char *s);
 
+/**
+ * Returns the number of elements given in parameter args.
+ * */
 int number_of_args(char **args);
