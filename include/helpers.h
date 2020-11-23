@@ -46,3 +46,9 @@ char *find_path(char **envp, char *exec);
  * Returns the number of elements given in parameter args.
  * */
 int number_of_args(char **args);
+
+/*
+ * Detects if the given expression is make out of one or multiple pipes.
+ * @returns the index of the first pipe found, or -1 if no pipe was found.
+ * */
+int is_pipeline(char **expression);

@@ -6,12 +6,14 @@
 // #include <string.h>
 // #include <unistd.h>
 
-#include "../include/processes.h"
 #include "../include/builtins.h"
+#include "../include/pipes.h"
 
 int main(int argc, char** argv, char**envp) {
 
-    for (int i=0;envp[i]!=NULL;i++){
+    pid_list *pidlist ;
+
+    for (int i=0; envp[i]!=NULL; i++){
         printf("env[%d]=%s\n",i,envp[i]);
     }
     printf("\n");
@@ -22,6 +24,8 @@ int main(int argc, char** argv, char**envp) {
     // setbuf(stdout, NULL);
 
     while(1) {
+        pidlist = (pid_list *) malloc(sizeof(pid_list));
+
         printf("> ");
         fflush(stdout);
         char* line = readline();
@@ -31,6 +35,13 @@ int main(int argc, char** argv, char**envp) {
             printf("[%s], ", words[i]);
         }
 
+    
+        
+
+        // Check if given command is made of pipes.
+        if(is_pipeline(words) != -1){
+            pipeline_manager(words, envp, pidlist);
+        }
         // Check if wanted command is implemented by the built-in functions.
         if (run_builtin(words, envp))
         {
@@ -38,7 +49,7 @@ int main(int argc, char** argv, char**envp) {
         // If not, launch the command as an external command.
         else 
         {
-            launch_external_command(words, envp);
+            launch_external_command(words, envp, pidlist);
         }
 
         printf("\n");

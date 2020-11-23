@@ -222,3 +222,13 @@ int number_of_args(char **args){
         ;
     return i;
 }
+int is_pipeline(char **expression) {
+    for (int i = 0; expression[i] != NULL; i++){
+        if ( expression[i][0] == '|'){
+            return i;
+        }
+    }
+    return -1;
+}
+
+

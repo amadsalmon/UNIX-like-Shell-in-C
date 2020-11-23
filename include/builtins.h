@@ -9,6 +9,11 @@
 
 int run_builtin(char **args, char **envp);
 
+/**
+ * @returns 1 if given expression contains a function
+ * */
+int is_builtin(char **args);
+
 int nb_builtins();
 
 int cd(char **args, char **envp);
