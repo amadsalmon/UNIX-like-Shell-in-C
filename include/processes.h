@@ -3,4 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 
-int launch_process(char **args, char **envp);
+#include "helpers.h"
+
+int launch_external_command(char **args, char **envp);

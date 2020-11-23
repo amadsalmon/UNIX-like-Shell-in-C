@@ -38,7 +38,7 @@ int main(int argc, char** argv, char**envp) {
         // If not, launch the command as an external command.
         else 
         {
-            launch_process(words, envp);
+            launch_external_command(words, envp);
         }
 
         printf("\n");

@@ -36,6 +36,13 @@ char *name_envp(char *s);
 void special_chars_remover(char *s);
 
 /**
+ * Returns path (if it exists) in which the given external command can be found.
+ * 
+ * @author Elias El Yandouzi (https://github.com/EliasEly)
+ * */
+char *find_path(char **envp, char *exec);
+
+/**
  * Returns the number of elements given in parameter args.
  * */
 int number_of_args(char **args);

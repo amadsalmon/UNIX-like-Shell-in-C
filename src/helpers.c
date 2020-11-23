@@ -170,6 +170,52 @@ void special_chars_remover(char *s)
     return;
 }
 
+/**
+ * Returns path (if it exists) in which the given external command can be found.
+ * 
+ * @author Elias El Yandouzi (https://github.com/EliasEly)
+ * */
+char* find_path(char** envp, char* exec){
+    char* path = NULL;
+
+    for(int i = 0; envp[i] != NULL; i++){
+        if (strcmp(name_envp(envp[i]), "PATH") == 0){
+        path = envp[i]+5;
+        break;
+        }
+    }
+
+    if (path == NULL){
+        printf("PANIC: Couldn't find PATH env variable !\n");
+        return NULL;
+    }
+
+    char* bin_path = malloc(128 * sizeof(char));
+    int i = 0;
+    while(*path != '\0'){
+        while(path[i] != '\0' && path[i] != ':')
+            i++;
+
+        for(int l = 0; l < i; l++)
+            bin_path[l] = path[l];
+            
+        bin_path[i] = '/';
+        bin_path[i+1] = '\0';
+
+        strcat(bin_path, exec);
+
+        // Flag F_OK just check if the file exists.
+        // X_OK make sure you have the rights to run it.
+        if (access (bin_path, F_OK|X_OK) != -1)
+        return bin_path;
+
+        path += i + 1;
+        i = 0;
+    }
+    free(bin_path);
+    return NULL;
+}
+
 int number_of_args(char **args){
     int i;
     for (i = 0; args[i] != NULL; i++)

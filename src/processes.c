@@ -1,6 +1,6 @@
 #include "../include/processes.h"
 
-int launch_process(char** args, char**envp){
+int launch_external_command(char** args, char**envp){
     pid_t pid;
     int status;
 
@@ -12,8 +12,9 @@ int launch_process(char** args, char**envp){
     } else if (pid == 0) {
         // Child process
 
-        char path[100] = "/bin/";
-        strcat(path, args[0]);
+        
+         
+        char * path = find_path(envp, args[0]);
         if (execve(path, args, envp) == -1)
         {
             perror("Execve error");
