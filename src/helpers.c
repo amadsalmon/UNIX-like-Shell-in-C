@@ -126,6 +126,23 @@ char *substr(char *destination, char *source, int pos, int length)
     return destination;
 }
 
+/**
+ * Read an environment variable and returns its name.
+ * The returned array must be freed.
+ * 
+ * @author Elias El Yandouzi (https://github.com/EliasEly)
+ * */
+char *name_envp(char *s) {
+    int j;
+    for (j = 0; s[j] != '='; j++);
+
+    char *envp_name = malloc(j + 1 * sizeof(char));
+    memcpy(envp_name, s, j);
+    envp_name[j] = '\0';
+
+    return envp_name;
+}
+
 void special_chars_remover(char *s)
 {
     char *c = s;

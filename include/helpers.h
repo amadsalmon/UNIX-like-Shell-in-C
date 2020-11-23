@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 /*
  * Read a line from standard input into a newly allocated 
@@ -20,6 +21,14 @@ char **split_in_words(char *line);
  * Extracts length characters from source string starting from pos index, then copies them into the destination string.
  * */
 char *substr(char *destination, char *source, int pos, int length);
+
+/**
+ * Read an environment variable and returns its name.
+ * The returned array must be freed.
+ * 
+ * @author Elias El Yandouzi (https://github.com/EliasEly)
+ * */
+char *name_envp(char *s);
 
 /**
  * Removes from the given string any special character ( ' ', '\t', '<', '>', '|', '', '=') that can make the shell crash.
