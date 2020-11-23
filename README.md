@@ -15,12 +15,14 @@ Internal commands are implemented by the interpreter code. We will cover only a 
 
 - **cd :** _(change directory)_ command used to change the current working directory.
 - **pwd :** _(print working directory)_ writes the full pathname of the current working directory to the standard output.
-- **print :**
-- **set :**
+- **print :** prints all the environment variables.
+- **set :** used to set a specific environment variable to a certain value. 
 
 ### External commands
 
 When a command is not implemented by the built-in functions of the interpreter, it will launch them externally via `fork` and `execve`.
+This allows the interpreter to magnificently run commands such as `ls -al` or even `vim` for example, which is quite impressive to be honest.  
+![Launching ls -al on the interpreter](https://image.noelshack.com/fichiers/2020/48/1/1606096102-ls-al.png "Screenshot")
 
 ### Background commands _(incoming)_
 
